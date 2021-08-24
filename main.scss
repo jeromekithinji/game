@@ -10,7 +10,7 @@
 // Gradient background
 body {
     background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-    background-size: 400% 400%;
+    background-size: 600% 600%;
     animation: gradient 15s ease infinite;
 }
 
@@ -30,7 +30,7 @@ body {
     padding: 10px 0 5px 0;
     border-bottom: 5px solid black;
     text-align: center;
-    font-size: 40px;
+    font-size: 80px;
 }
 
 .game__footer {
@@ -41,5 +41,28 @@ body {
     bottom: 0;
     position: fixed;
     width: 100%;
+}
 
+
+main {
+    margin: 0 auto;
+    text-align: center;
+    padding: 10px;
+    margin-top: 30px;
+}
+
+.game__word {
+    display: block;
+    white-space: nowrap;
+}
+
+.letter {
+    display: inline-block;
+    // color: transparent;
+    border-bottom: 5px solid darkblue;
+    margin: 0 10px;
+    font-size: 50px;
+    padding: 10px;
+    transition: 0.5s;
+    text-transform: uppercase;
 }
