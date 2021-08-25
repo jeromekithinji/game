@@ -66,3 +66,32 @@ main {
     transition: 0.5s;
     text-transform: uppercase;
 }
+
+.game__input {
+    display: inline-block;
+    justify-content: center;
+    align-items: center;
+}
+
+.guess-letter {
+    font-size: 25px;
+    padding: 10px;
+}
+
+.submit-button {
+    border: none;
+    font-size: 25px;
+    padding: 10px 10px;
+    cursor: pointer;
+    background: #20a9ff;
+    color: white;
+    transition: 0.3s;
+    margin: 10px 0;
+    text-shadow: 1px 2px 0 black;
+}
+
+.submit-letter {
+    font-size: 50px;
+    height: 30px;
+    width: 30px;
+}
