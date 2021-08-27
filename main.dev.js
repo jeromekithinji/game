@@ -2,6 +2,7 @@
 
 var submitButton = document.getElementById('submit-button');
 var guess = document.getElementById('guess-letter');
+var errorMessage = document.getElementById('input__error');
 
 function footerText() {
   var footerText = document.getElementById("game__footer");
@@ -22,6 +23,7 @@ function getRandomNumber() {
 // Inserting the word into the blanks on the website by picking the word from the generated random number and looping the li element 
 
 function wordLetters() {
+  errorMessage.classList.add("hide");
   word = words[getRandomNumber()][0]; // console.log(word);
 
   for (i = 0; i < word.length; i++) {
@@ -45,12 +47,17 @@ function allLetter(inputText) {
 
 var letters = /^[A-Za-z]+$/;
 guess.addEventListener("input", function () {
-  // console.log(letters);
   if (guess.value.match(letters)) {
     submitButton.disabled = false;
     guess.classList.remove("invalid");
+    errorMessage.classList.add("hide");
+  } else if (guess.value = "") {
+    submitButton.disabled = true;
+    console.log("stuckk here");
   } else {
-    guess.classList.add("invalid"); // resetInput();
+    guess.classList.add("invalid");
+    errorMessage.classList.remove("hide");
+    submitButton.disabled = true;
   }
 }); // A function that checks if the letter submitted by user is in the word
 

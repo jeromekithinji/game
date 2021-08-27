@@ -1,5 +1,6 @@
 const submitButton = document.getElementById('submit-button');
 const guess = document.getElementById('guess-letter');
+const errorMessage = document.getElementById('input__error');
 
 
 function footerText() {
@@ -26,6 +27,7 @@ function getRandomNumber() {
 
 // Inserting the word into the blanks on the website by picking the word from the generated random number and looping the li element 
 function wordLetters () {
+    errorMessage.classList.add("hide")
     word = (words[getRandomNumber()][0]);
     // console.log(word);
     for (i = 0; i < word.length; i++) {
@@ -49,14 +51,19 @@ function allLetter(inputText) {
 
 const letters = /^[A-Za-z]+$/;
 guess.addEventListener("input", () => {
-    // console.log(letters);
     if (guess.value.match(letters)) {
         submitButton.disabled = false;
         guess.classList.remove("invalid")
+        errorMessage.classList.add("hide")
+    }
+    else if (guess.value = ""){
+        submitButton.disabled = true;
+        console.log("stuckk here")
     }
     else {
         guess.classList.add("invalid");
-        // resetInput();
+        errorMessage.classList.remove("hide")
+        submitButton.disabled = true;
     }
 })
 

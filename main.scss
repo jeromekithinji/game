@@ -95,6 +95,10 @@ main {
     }
 }
 
+.input__error {
+    text-align: left;
+}
+
 .submit-letter {
     font-size: 50px;
     height: 30px;
@@ -108,6 +112,10 @@ main {
 
 .invalid {
     border: 1px solid red;
+}
+
+.hide {
+    visibility: hidden;
 }
 
 // .wrong__guesses {
