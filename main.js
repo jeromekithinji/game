@@ -47,6 +47,18 @@ function allLetter(inputText) {
 }
 
 
+const letters = /^[A-Za-z]+$/;
+guess.addEventListener("input", () => {
+    // console.log(letters);
+    if (guess.value.match(letters)) {
+        submitButton.disabled = false;
+        guess.classList.remove("invalid")
+    }
+    else {
+        guess.classList.add("invalid");
+        // resetInput();
+    }
+})
 
 // A function that checks if the letter submitted by user is in the word
 submitButton.addEventListener("click", () => {
@@ -55,6 +67,7 @@ submitButton.addEventListener("click", () => {
     guessLetter = (guess.value).toUpperCase();
     if (word.includes(guessLetter)) {
         console.log("YESSSSS IT includes!!!!");
+        resetInput();
     }
     else {
         const letter = `<li class="letter">${guessLetter}</li>`;
@@ -62,5 +75,10 @@ submitButton.addEventListener("click", () => {
         console.log("NOOO!!!!");
     }
 });
+
+function resetInput () {
+    guess.value = "";
+    submitButton.disabled = true;
+};
 
 

@@ -41,8 +41,18 @@ function allLetter(inputText) {
     alert("message");
     return false;
   }
-} // A function that checks if the letter submitted by user is in the word
+}
 
+var letters = /^[A-Za-z]+$/;
+guess.addEventListener("input", function () {
+  // console.log(letters);
+  if (guess.value.match(letters)) {
+    submitButton.disabled = false;
+    guess.classList.remove("invalid");
+  } else {
+    guess.classList.add("invalid"); // resetInput();
+  }
+}); // A function that checks if the letter submitted by user is in the word
 
 submitButton.addEventListener("click", function () {
   // console.log(word);
@@ -51,9 +61,17 @@ submitButton.addEventListener("click", function () {
 
   if (word.includes(guessLetter)) {
     console.log("YESSSSS IT includes!!!!");
+    resetInput();
   } else {
     var letter = "<li class=\"letter\">".concat(guessLetter, "</li>");
     document.getElementById("wrong__guesses").innerHTML += letter;
     console.log("NOOO!!!!");
   }
 });
+
+function resetInput() {
+  guess.value = "";
+  submitButton.disabled = true;
+}
+
+;

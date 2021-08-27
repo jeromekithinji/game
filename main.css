@@ -84,9 +84,17 @@ main {
   margin: 10px 0;
   text-shadow: 1px 2px 0 black;
 }
+.submit-button:disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}
 
 .submit-letter {
   font-size: 50px;
   height: 30px;
   width: 30px;
+}
+
+.invalid {
+  border: 1px solid red;
 }
