@@ -1,6 +1,7 @@
 "use strict";
 
-console.log("JavaScript works");
+var submitButton = document.getElementById('submit-button');
+var guess = document.getElementById('guess-letter');
 
 function footerText() {
   var footerText = document.getElementById("game__footer");
@@ -21,13 +22,38 @@ function getRandomNumber() {
 // Inserting the word into the blanks on the website by picking the word from the generated random number and looping the li element 
 
 function wordLetters() {
-  word = words[getRandomNumber()][0];
-  console.log(word);
+  word = words[getRandomNumber()][0]; // console.log(word);
 
   for (i = 0; i < word.length; i++) {
-    var html = "<li class=\"letter\">".concat(word.charAt(i), "</li>");
-    document.getElementById("game__word").innerHTML += html;
+    var letter = "<li class=\"letter\">".concat(word.charAt(i), "</li>");
+    document.getElementById("game__word").innerHTML += letter;
   }
 }
 
 wordLetters();
+
+function allLetter(inputText) {
+  var letters = /^[A-Za-z]+$/;
+
+  if (inputText.value.match(letters)) {
+    return true;
+  } else {
+    alert("message");
+    return false;
+  }
+} // A function that checks if the letter submitted by user is in the word
+
+
+submitButton.addEventListener("click", function () {
+  // console.log(word);
+  word = word.toUpperCase();
+  guessLetter = guess.value.toUpperCase();
+
+  if (word.includes(guessLetter)) {
+    console.log("YESSSSS IT includes!!!!");
+  } else {
+    var letter = "<li class=\"letter\">".concat(guessLetter, "</li>");
+    document.getElementById("wrong__guesses").innerHTML += letter;
+    console.log("NOOO!!!!");
+  }
+});
