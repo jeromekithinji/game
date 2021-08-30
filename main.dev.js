@@ -3,6 +3,9 @@
 var submitButton = document.getElementById('submit-button');
 var guess = document.getElementById('guess-letter');
 var errorMessage = document.getElementById('input__error');
+var gameWord = document.getElementById("game__word");
+var scoreDisplay = document.getElementById("game__score");
+var noOfGuesses = 0;
 
 function footerText() {
   var footerText = document.getElementById("game__footer");
@@ -27,23 +30,14 @@ function wordLetters() {
   word = words[getRandomNumber()][0]; // console.log(word);
 
   for (i = 0; i < word.length; i++) {
-    var letter = "<li class=\"letter\">".concat(word.charAt(i), "</li>");
-    document.getElementById("game__word").innerHTML += letter;
+    var letter = "<li class=\"letter hide\">".concat(word.charAt(i), "</li>");
+    gameWord.innerHTML += letter;
+    noOfGuesses++;
   }
 }
 
 wordLetters();
-
-function allLetter(inputText) {
-  var letters = /^[A-Za-z]+$/;
-
-  if (inputText.value.match(letters)) {
-    return true;
-  } else {
-    alert("message");
-    return false;
-  }
-}
+guessCounter(start); // Validates user input
 
 var letters = /^[A-Za-z]+$/;
 guess.addEventListener("input", function () {
@@ -68,13 +62,46 @@ submitButton.addEventListener("click", function () {
 
   if (word.includes(guessLetter)) {
     console.log("YESSSSS IT includes!!!!");
-    resetInput();
+    resetInput(); // Find all the "letter" elements..
+    // loop through them
+    // if the letter == guestLetter
+    // remove the hide class
+
+    var items = gameWord.getElementsByClassName("letter");
+
+    for (var i = 0; i < items.length; ++i) {
+      var w = items[i];
+      wordletter = w.innerHTML.toUpperCase();
+
+      if (wordletter = guessLetter) {
+        w.classList.remove("hide");
+        console.log("Remove hide success");
+      }
+
+      console.log(w);
+      console.log(wordletter); // works
+    } // wordLetter.classList.remove("hide");
+
   } else {
     var letter = "<li class=\"letter\">".concat(guessLetter, "</li>");
     document.getElementById("wrong__guesses").innerHTML += letter;
     console.log("NOOO!!!!");
+    guessCounter(false);
   }
 });
+
+var guessCounter = function guessCounter(status) {
+  // noOfGuesses +=6
+  if (status === start) {
+    var _guesses = "<h2>".concat(noOfGuesses + 6, "</h2>");
+
+    scoreDisplay.innerHTML = _guesses;
+  } else if (status === false) {
+    noOfGuesses--;
+    guesses = "<h2>".concat(noOfGuesses, "</h2>");
+    scoreDisplay.innerHTML = guesses;
+  }
+};
 
 function resetInput() {
   guess.value = "";
