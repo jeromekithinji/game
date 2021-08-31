@@ -3,6 +3,9 @@ const guess = document.getElementById('guess-letter');
 const errorMessage = document.getElementById('input__error');
 const gameWord = document.getElementById("game__word");
 const scoreDisplay = document.getElementById("game__score");
+const wrongHeading = document.getElementById("wrong__heading");
+const wrongSection = document.getElementById("wrong__letters");
+
 
 let noOfGuesses = 0;
 
@@ -37,11 +40,12 @@ function wordLetters () {
         const letter = `<li class="letter hide">${word.charAt(i)}</li>`;
         gameWord.innerHTML += letter;
         noOfGuesses ++;
-
     }
+
 }
 wordLetters();
-guessCounter(start);
+// guessCounter(start);
+
 
 
 // Validates user input
@@ -71,6 +75,7 @@ submitButton.addEventListener("click", () => {
     if (word.includes(guessLetter)) {
         console.log("YESSSSS IT includes!!!!");
         resetInput();
+        wonGame();
 
         // Find all the "letter" elements..
         // loop through them
@@ -92,6 +97,7 @@ submitButton.addEventListener("click", () => {
         // wordLetter.classList.remove("hide");
     }
     else {
+        // wrongSection.classList.remove("hide");
         const letter = `<li class="letter">${guessLetter}</li>`;
         document.getElementById("wrong__guesses").innerHTML += letter;
         console.log("NOOO!!!!");
@@ -102,15 +108,15 @@ submitButton.addEventListener("click", () => {
 
 const guessCounter = status => {
     // noOfGuesses +=6
-    if (status === start) {
-        let guesses = `<h2>${noOfGuesses+6}</h2>`;
-        scoreDisplay.innerHTML = guesses;
+    if (status == "start") {
+        let guesses = `<h2> Guesses Remaining: ${noOfGuesses+6}</h2>`;
+        scoreDisplay.innerHTML += guesses;
     }
 
     else if (status === false) {
         noOfGuesses --;
-        guesses = `<h2>${noOfGuesses}</h2>`;
-        scoreDisplay.innerHTML = guesses;
+        guesses = `<h2>Guesses Remaining: ${noOfGuesses}</h2>`;
+        scoreDisplay.innerHTML += guesses;
     }
 }
 
@@ -119,5 +125,35 @@ function resetInput () {
     guess.value = "";
     submitButton.disabled = true;
 };
+ 
 
+// Won game
+var myCanvas = document.createElement('canvas');
+document.body.appendChild(myCanvas);
 
+var myConfetti = confetti.create(myCanvas, {
+    resize: true,
+    useWorker: true
+});
+
+const wonGame = () => {
+    const duration = 30 * 1000;
+    const end = Date.now() + duration;
+    const frame = () => {
+    // launch a few confetti from the left edge
+        confetti({
+            particleCount: 7,
+            angle: 60,
+            spread: 55,
+            origin: { x: 0 }
+        });
+    // and launch a few from the right edge
+        confetti({
+            particleCount: 7,
+            angle: 120,
+            spread: 55,
+            origin: { x: 1 }
+        });
+    };
+    frame()
+}

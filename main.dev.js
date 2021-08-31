@@ -5,6 +5,8 @@ var guess = document.getElementById('guess-letter');
 var errorMessage = document.getElementById('input__error');
 var gameWord = document.getElementById("game__word");
 var scoreDisplay = document.getElementById("game__score");
+var wrongHeading = document.getElementById("wrong__heading");
+var wrongSection = document.getElementById("wrong__letters");
 var noOfGuesses = 0;
 
 function footerText() {
@@ -36,8 +38,8 @@ function wordLetters() {
   }
 }
 
-wordLetters();
-guessCounter(start); // Validates user input
+wordLetters(); // guessCounter(start);
+// Validates user input
 
 var letters = /^[A-Za-z]+$/;
 guess.addEventListener("input", function () {
@@ -62,7 +64,8 @@ submitButton.addEventListener("click", function () {
 
   if (word.includes(guessLetter)) {
     console.log("YESSSSS IT includes!!!!");
-    resetInput(); // Find all the "letter" elements..
+    resetInput();
+    wonGame(); // Find all the "letter" elements..
     // loop through them
     // if the letter == guestLetter
     // remove the hide class
@@ -83,6 +86,7 @@ submitButton.addEventListener("click", function () {
     } // wordLetter.classList.remove("hide");
 
   } else {
+    // wrongSection.classList.remove("hide");
     var letter = "<li class=\"letter\">".concat(guessLetter, "</li>");
     document.getElementById("wrong__guesses").innerHTML += letter;
     console.log("NOOO!!!!");
@@ -92,14 +96,14 @@ submitButton.addEventListener("click", function () {
 
 var guessCounter = function guessCounter(status) {
   // noOfGuesses +=6
-  if (status === start) {
-    var _guesses = "<h2>".concat(noOfGuesses + 6, "</h2>");
+  if (status == "start") {
+    var _guesses = "<h2> Guesses Remaining: ".concat(noOfGuesses + 6, "</h2>");
 
-    scoreDisplay.innerHTML = _guesses;
+    scoreDisplay.innerHTML += _guesses;
   } else if (status === false) {
     noOfGuesses--;
-    guesses = "<h2>".concat(noOfGuesses, "</h2>");
-    scoreDisplay.innerHTML = guesses;
+    guesses = "<h2>Guesses Remaining: ".concat(noOfGuesses, "</h2>");
+    scoreDisplay.innerHTML += guesses;
   }
 };
 
@@ -108,4 +112,39 @@ function resetInput() {
   submitButton.disabled = true;
 }
 
-;
+; // Won game
+
+var myCanvas = document.createElement('canvas');
+document.body.appendChild(myCanvas);
+var myConfetti = confetti.create(myCanvas, {
+  resize: true,
+  useWorker: true
+});
+
+var wonGame = function wonGame() {
+  var duration = 30 * 1000;
+  var end = Date.now() + duration;
+
+  var frame = function frame() {
+    // launch a few confetti from the left edge
+    confetti({
+      particleCount: 7,
+      angle: 60,
+      spread: 55,
+      origin: {
+        x: 0
+      }
+    }); // and launch a few from the right edge
+
+    confetti({
+      particleCount: 7,
+      angle: 120,
+      spread: 55,
+      origin: {
+        x: 1
+      }
+    });
+  };
+
+  frame();
+};

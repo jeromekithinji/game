@@ -40,6 +40,11 @@ body {
   width: 100%;
 }
 
+.game__score {
+  text-align: right;
+  padding: 15px 20px 10px 10px;
+}
+
 main {
   margin: 0 auto;
   text-align: center;
@@ -109,4 +114,18 @@ main {
 
 .unhide {
   visibility: visible;
+}
+
+.game__won {
+  display: none;
+  padding: 20px;
+  position: absolute;
+  top: 100px;
+  left: 0;
+  right: 0;
+  bottom: 40px;
+  width: 100%;
+  /* height: 100%; */
+  background: #0091ec;
+  z-index: 12402402;
 }
