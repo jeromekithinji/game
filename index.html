@@ -39,7 +39,7 @@
     <div class="game__hint">
 
     </div>
-    <div class="wrong__letters hide" >
+    <div class="wrong__letters hide" id="wrong__letters" >
         <h2 class="wrong__heading"> Wrong Letters:</h2>
         <ul class="wrong__guesses" id="wrong__guesses">
             
@@ -49,14 +49,15 @@
     <div class="game__won">
         <h1>Awesome, You Won!</h1>
         <p>You solved the word in 50 Guesses!</p>
-        <p>Score: (wrong/ right)*100 %</p>
+        <p>Score: (noOfguesses/ noOfguesses-wrong)*100 %</p>
 
     </div>
     </main>
 
     <footer class="game__footer" id="game__footer">
     </footer>
-    <script src="../Sandbox/JavaScript/npm/node_modules/canvas-confetti/dist/confetti.browser.js"></script>
+    <!-- <script src="../Sandbox/JavaScript/npm/node_modules/canvas-confetti/dist/"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
     <script src="main.js"></script>
 
 </body>

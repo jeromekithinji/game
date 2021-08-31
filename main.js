@@ -5,6 +5,7 @@ const gameWord = document.getElementById("game__word");
 const scoreDisplay = document.getElementById("game__score");
 const wrongHeading = document.getElementById("wrong__heading");
 const wrongSection = document.getElementById("wrong__letters");
+const wonGameSection = document.getElementById("game__won");
 
 
 let noOfGuesses = 0;
@@ -13,7 +14,6 @@ function footerText() {
     let footerText = document.getElementById("game__footer");
     footerText.innerHTML = `Jerome Kithinji, ${new Date().getFullYear()}. `;
 };
-
 footerText();
 
 
@@ -27,9 +27,21 @@ function getRandomNumber() {
     return Math.floor(Math.random() * words.length);
 };
 
-// Generates a random number
-// console.log(getRandomNumber());
 
+const guessCounter = status => {
+    // noOfGuesses +=6
+    if (status === "start") {
+        noOfGuesses += 6;
+        let guesses = `<h2> Guesses Remaining: ${noOfGuesses}</h2>`;
+        scoreDisplay.innerHTML += guesses;
+    }
+
+    else if (status === false) {
+        noOfGuesses --;
+        guesses = `<h2>Guesses Remaining: ${noOfGuesses}</h2>`;
+        scoreDisplay.innerHTML = guesses;
+    }
+}
 
 // Inserting the word into the blanks on the website by picking the word from the generated random number and looping the li element 
 function wordLetters () {
@@ -41,10 +53,9 @@ function wordLetters () {
         gameWord.innerHTML += letter;
         noOfGuesses ++;
     }
-
+    guessCounter("start");
 }
 wordLetters();
-// guessCounter(start);
 
 
 
@@ -67,6 +78,7 @@ guess.addEventListener("input", () => {
     }
 })
 
+
 // A function that checks if the letter submitted by user is in the word
 submitButton.addEventListener("click", () => {
     // console.log(word);
@@ -85,19 +97,18 @@ submitButton.addEventListener("click", () => {
         for (var i = 0; i < items.length; ++i) {
             let w = items[i];
             wordletter = (w.innerHTML).toUpperCase();
-            if (wordletter = guessLetter) {
+            if (wordletter === guessLetter) {
                 w.classList.remove("hide");
                 console.log("Remove hide success");
             }
             console.log(w);
             console.log(wordletter);
-            // works
         }
         
         // wordLetter.classList.remove("hide");
     }
     else {
-        // wrongSection.classList.remove("hide");
+        wrongSection.classList.remove("hide");
         const letter = `<li class="letter">${guessLetter}</li>`;
         document.getElementById("wrong__guesses").innerHTML += letter;
         console.log("NOOO!!!!");
@@ -106,26 +117,13 @@ submitButton.addEventListener("click", () => {
 });
 
 
-const guessCounter = status => {
-    // noOfGuesses +=6
-    if (status == "start") {
-        let guesses = `<h2> Guesses Remaining: ${noOfGuesses+6}</h2>`;
-        scoreDisplay.innerHTML += guesses;
-    }
-
-    else if (status === false) {
-        noOfGuesses --;
-        guesses = `<h2>Guesses Remaining: ${noOfGuesses}</h2>`;
-        scoreDisplay.innerHTML += guesses;
-    }
-}
 
 
 function resetInput () {
     guess.value = "";
     submitButton.disabled = true;
 };
- 
+
 
 // Won game
 var myCanvas = document.createElement('canvas');
@@ -137,23 +135,38 @@ var myConfetti = confetti.create(myCanvas, {
 });
 
 const wonGame = () => {
-    const duration = 30 * 1000;
+    const duration = 60 * 1000;
     const end = Date.now() + duration;
     const frame = () => {
     // launch a few confetti from the left edge
         confetti({
-            particleCount: 7,
+            particleCount: 1000,
             angle: 60,
-            spread: 55,
+            spread: 155,
             origin: { x: 0 }
         });
     // and launch a few from the right edge
         confetti({
-            particleCount: 7,
+            particleCount: 1000,
             angle: 120,
-            spread: 55,
+            spread: 155,
             origin: { x: 1 }
         });
     };
     frame()
+};
+wonGame();
+
+// Display the won message
+// wonGameSection.classList.remove("hide");
+// const won = '<h1>Awesome, You Won!</h1>'
+//             '<p>You solved the word in ${noOfGuesses} Guesses!</p>'
+//             '<p>Score: (wrong/ right)*100 %</p>';
+
+
+const gameScore = (noOfGuesses, right) => {
+    score = ((noOfGuesses/right)*100).toFixed(0);
+    return score;
 }
+console.log(gameScore(10, 5));
+
