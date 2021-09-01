@@ -10,6 +10,7 @@ var wrongSection = document.getElementById("wrong__letters");
 var wonGameSection = document.getElementById("game__won");
 var gameHint = document.getElementById("game__hint");
 var hintButton = document.getElementById("button__hint");
+var resetButton = document.getElementById("reset__game");
 var remainingGuesses = 0;
 var noOfGuesses = 0;
 
@@ -169,6 +170,7 @@ var calcualteGameScore = function calcualteGameScore() {
   score = (remainingGuesses / totalGuesses * 100).toFixed(0);
   return score;
 }; // console.log(gameScore(10, 5));
+// Hint button and display hint
 
 
 var displayWordHint = function displayWordHint() {
@@ -179,4 +181,7 @@ var displayWordHint = function displayWordHint() {
 hintButton.addEventListener("click", function () {
   hintButton.style.display = "none";
   displayWordHint();
+});
+resetButton.addEventListener("click", function () {
+  location.reload();
 });

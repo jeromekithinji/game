@@ -7,7 +7,8 @@ const wrongHeading = document.getElementById("wrong__heading");
 const wrongSection = document.getElementById("wrong__letters");
 const wonGameSection = document.getElementById("game__won");
 const gameHint = document.getElementById("game__hint");
-const hintButton = document.getElementById("button__hint")
+const hintButton = document.getElementById("button__hint");
+const resetButton = document.getElementById("reset__game");
 
 
 let remainingGuesses = 0;
@@ -176,6 +177,7 @@ const calcualteGameScore = () => {
 }
 // console.log(gameScore(10, 5));
 
+// Hint button and display hint
 const displayWordHint = () => {
     const hintHTML = `<p>Hint: ${hint}</p>`;
     gameHint.innerHTML = hintHTML;
@@ -184,4 +186,8 @@ const displayWordHint = () => {
 hintButton.addEventListener("click", () => {
     hintButton.style.display = "none";
     displayWordHint();
-})
+});
+
+resetButton.addEventListener("click", () => {
+    location.reload();
+});
