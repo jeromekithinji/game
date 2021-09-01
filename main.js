@@ -6,6 +6,7 @@ const scoreDisplay = document.getElementById("game__score");
 const wrongHeading = document.getElementById("wrong__heading");
 const wrongSection = document.getElementById("wrong__letters");
 const wonGameSection = document.getElementById("game__won");
+const lostGameSection = document.getElementById("game__lost");
 const gameHint = document.getElementById("game__hint");
 const hintButton = document.getElementById("button__hint");
 const resetButton = document.getElementById("reset__game");
@@ -45,6 +46,9 @@ const guessCounter = status => {
         remainingGuesses --;
         guesses = `<h2>Guesses Remaining: ${remainingGuesses}</h2>`;
         scoreDisplay.innerHTML = guesses;
+        if (remainingGuesses == 0) {
+            lostGame();
+        }
     }
 }
 
@@ -56,7 +60,7 @@ function wordLetters () {
     hint = (selcetedWordItem[1]);
     console.log(hint);
     for (i = 0; i < word.length; i++) {
-        const letter = `<li class="letter hide">${word.charAt(i)}</li>`;
+        const letter = `<li class="letter">${word.charAt(i)}</li>`;
         gameWord.innerHTML += letter;
         remainingGuesses ++;
     }
@@ -86,6 +90,7 @@ guess.addEventListener("input", () => {
 })
 
 wordComplete = word.length;
+wrongLetters = [];
 // A function that checks if the letter submitted by user is in the word
 submitButton.addEventListener("click", () => {
     // console.log(word);
@@ -102,7 +107,8 @@ submitButton.addEventListener("click", () => {
             let w = items[i];
             wordletter = (w.innerHTML).toUpperCase();
             if (wordletter === guessLetter) {
-                w.classList.remove("hide");
+                w.style.color = "black";
+                // w.classList.remove("hide");
                 wordComplete --;
                 console.log(wordComplete);
                 // Check if all the letters have been matched
@@ -117,10 +123,15 @@ submitButton.addEventListener("click", () => {
     }
     else {
         wrongSection.classList.remove("hide");
-        const letter = `<li class="letter">${guessLetter}</li>`;
-        document.getElementById("wrong__guesses").innerHTML += letter;
         console.log("NOOO!!!!");
-        guessCounter(false);
+        if (wrongLetters.includes(guessLetter)) {
+        }
+        else {
+            wrongLetters.push(guessLetter);
+            const letter = `<li class="wrong__letter">${guessLetter}</li>`;
+            document.getElementById("wrong__guesses").innerHTML += letter;
+            guessCounter(false);
+        }
     }
 });
 
@@ -165,7 +176,8 @@ const wonGame = () => {
     const noOfGuess = 10;
     const wonHTML = `<h1>Awesome, You Won!</h1>
                         <p>You solved the word in ${noOfGuesses + (totalGuesses - remainingGuesses)} Guesses!</p>
-                        <p>Score: ${calcualteGameScore()}%</p>`;
+                        <p>Score: ${calcualteGameScore()}%</p>
+                        <button id="reset__game">Reset</button>`;
     wonGameSection.innerHTML = wonHTML;
 };
 // wonGame();
@@ -191,3 +203,11 @@ hintButton.addEventListener("click", () => {
 resetButton.addEventListener("click", () => {
     location.reload();
 });
+
+const lostGame = () => {
+    lostGameSection.classList.remove("hide");
+    const lostHTML = `<h1>You Lost... The word was ${word}</h1>
+                        <p>Don't worry, you'll get the next one!</p>
+                        <button id="reset__game">Play Again?</button>`;
+    lostGameSection.innerHTML = lostHTML;
+}

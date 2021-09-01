@@ -8,6 +8,7 @@ var scoreDisplay = document.getElementById("game__score");
 var wrongHeading = document.getElementById("wrong__heading");
 var wrongSection = document.getElementById("wrong__letters");
 var wonGameSection = document.getElementById("game__won");
+var lostGameSection = document.getElementById("game__lost");
 var gameHint = document.getElementById("game__hint");
 var hintButton = document.getElementById("button__hint");
 var resetButton = document.getElementById("reset__game");
@@ -43,6 +44,10 @@ var guessCounter = function guessCounter(status) {
     remainingGuesses--;
     guesses = "<h2>Guesses Remaining: ".concat(remainingGuesses, "</h2>");
     scoreDisplay.innerHTML = guesses;
+
+    if (remainingGuesses == 0) {
+      lostGame();
+    }
   }
 }; // Inserting the word into the blanks on the website by picking the word from the generated random number and looping the li element 
 
@@ -55,7 +60,7 @@ function wordLetters() {
   console.log(hint);
 
   for (i = 0; i < word.length; i++) {
-    var letter = "<li class=\"letter hide\">".concat(word.charAt(i), "</li>");
+    var letter = "<li class=\"letter\">".concat(word.charAt(i), "</li>");
     gameWord.innerHTML += letter;
     remainingGuesses++;
   }
@@ -80,7 +85,8 @@ guess.addEventListener("input", function () {
     submitButton.disabled = true;
   }
 });
-wordComplete = word.length; // A function that checks if the letter submitted by user is in the word
+wordComplete = word.length;
+wrongLetters = []; // A function that checks if the letter submitted by user is in the word
 
 submitButton.addEventListener("click", function () {
   // console.log(word);
@@ -99,7 +105,8 @@ submitButton.addEventListener("click", function () {
       wordletter = w.innerHTML.toUpperCase();
 
       if (wordletter === guessLetter) {
-        w.classList.remove("hide");
+        w.style.color = "black"; // w.classList.remove("hide");
+
         wordComplete--;
         console.log(wordComplete); // Check if all the letters have been matched
 
@@ -111,10 +118,14 @@ submitButton.addEventListener("click", function () {
     }
   } else {
     wrongSection.classList.remove("hide");
-    var letter = "<li class=\"letter\">".concat(guessLetter, "</li>");
-    document.getElementById("wrong__guesses").innerHTML += letter;
     console.log("NOOO!!!!");
-    guessCounter(false);
+
+    if (wrongLetters.includes(guessLetter)) {} else {
+      wrongLetters.push(guessLetter);
+      var letter = "<li class=\"wrong__letter\">".concat(guessLetter, "</li>");
+      document.getElementById("wrong__guesses").innerHTML += letter;
+      guessCounter(false);
+    }
   }
 });
 
@@ -160,7 +171,7 @@ var wonGame = function wonGame() {
   frame();
   wonGameSection.classList.remove("hide");
   var noOfGuess = 10;
-  var wonHTML = "<h1>Awesome, You Won!</h1>\n                        <p>You solved the word in ".concat(noOfGuesses + (totalGuesses - remainingGuesses), " Guesses!</p>\n                        <p>Score: ").concat(calcualteGameScore(), "%</p>");
+  var wonHTML = "<h1>Awesome, You Won!</h1>\n                        <p>You solved the word in ".concat(noOfGuesses + (totalGuesses - remainingGuesses), " Guesses!</p>\n                        <p>Score: ").concat(calcualteGameScore(), "%</p>\n                        <button id=\"reset__game\">Reset</button>");
   wonGameSection.innerHTML = wonHTML;
 }; // wonGame();
 // Display the won message
@@ -185,3 +196,9 @@ hintButton.addEventListener("click", function () {
 resetButton.addEventListener("click", function () {
   location.reload();
 });
+
+var lostGame = function lostGame() {
+  lostGameSection.classList.remove("hide");
+  var lostHTML = "<h1>You Lost... The word was ".concat(word, "</h1>\n                        <p>Don't worry, you'll get the next one!</p>\n                        <button id=\"reset__game\">Play Again?</button>");
+  lostGameSection.innerHTML = lostHTML;
+};
