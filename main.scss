@@ -101,6 +101,7 @@ main {
 
 .input__error {
     text-align: left;
+    margin-bottom: 30px;
 }
 
 .submit-letter {
@@ -127,7 +128,7 @@ main {
 }
 
 .game__won {
-    display:none;
+    display:block;
     padding: 20px;
     position: absolute;
     top: 100px;

@@ -8,6 +8,9 @@ var scoreDisplay = document.getElementById("game__score");
 var wrongHeading = document.getElementById("wrong__heading");
 var wrongSection = document.getElementById("wrong__letters");
 var wonGameSection = document.getElementById("game__won");
+var gameHint = document.getElementById("game__hint");
+var hintButton = document.getElementById("button__hint");
+var remainingGuesses = 0;
 var noOfGuesses = 0;
 
 function footerText() {
@@ -27,16 +30,17 @@ function getRandomNumber() {
 ;
 
 var guessCounter = function guessCounter(status) {
-  // noOfGuesses +=6
   if (status === "start") {
-    noOfGuesses += 6;
+    remainingGuesses += 6;
+    totalGuesses = remainingGuesses;
+    console.log(noOfGuesses);
 
-    var _guesses = "<h2> Guesses Remaining: ".concat(noOfGuesses, "</h2>");
+    var _guesses = "<h2> Guesses Remaining: ".concat(remainingGuesses, "</h2>");
 
     scoreDisplay.innerHTML += _guesses;
   } else if (status === false) {
-    noOfGuesses--;
-    guesses = "<h2>Guesses Remaining: ".concat(noOfGuesses, "</h2>");
+    remainingGuesses--;
+    guesses = "<h2>Guesses Remaining: ".concat(remainingGuesses, "</h2>");
     scoreDisplay.innerHTML = guesses;
   }
 }; // Inserting the word into the blanks on the website by picking the word from the generated random number and looping the li element 
@@ -44,12 +48,15 @@ var guessCounter = function guessCounter(status) {
 
 function wordLetters() {
   errorMessage.classList.add("hide");
-  word = words[getRandomNumber()][0]; // console.log(word);
+  selcetedWordItem = words[getRandomNumber()];
+  word = selcetedWordItem[0];
+  hint = selcetedWordItem[1];
+  console.log(hint);
 
   for (i = 0; i < word.length; i++) {
     var letter = "<li class=\"letter hide\">".concat(word.charAt(i), "</li>");
     gameWord.innerHTML += letter;
-    noOfGuesses++;
+    remainingGuesses++;
   }
 
   guessCounter("start");
@@ -71,7 +78,8 @@ guess.addEventListener("input", function () {
     errorMessage.classList.remove("hide");
     submitButton.disabled = true;
   }
-}); // A function that checks if the letter submitted by user is in the word
+});
+wordComplete = word.length; // A function that checks if the letter submitted by user is in the word
 
 submitButton.addEventListener("click", function () {
   // console.log(word);
@@ -80,12 +88,9 @@ submitButton.addEventListener("click", function () {
 
   if (word.includes(guessLetter)) {
     console.log("YESSSSS IT includes!!!!");
+    noOfGuesses += 1;
+    console.log(noOfGuesses);
     resetInput();
-    wonGame(); // Find all the "letter" elements..
-    // loop through them
-    // if the letter == guestLetter
-    // remove the hide class
-
     var items = gameWord.getElementsByClassName("letter");
 
     for (var i = 0; i < items.length; ++i) {
@@ -94,13 +99,15 @@ submitButton.addEventListener("click", function () {
 
       if (wordletter === guessLetter) {
         w.classList.remove("hide");
-        console.log("Remove hide success");
+        wordComplete--;
+        console.log(wordComplete); // Check if all the letters have been matched
+
+        if (wordComplete === 0) {
+          wonGame();
+          console.log("Word Complete!!!!"); // gameScore();
+        }
       }
-
-      console.log(w);
-      console.log(wordletter);
-    } // wordLetter.classList.remove("hide");
-
+    }
   } else {
     wrongSection.classList.remove("hide");
     var letter = "<li class=\"letter\">".concat(guessLetter, "</li>");
@@ -150,17 +157,26 @@ var wonGame = function wonGame() {
   };
 
   frame();
-};
+  wonGameSection.classList.remove("hide");
+  var noOfGuess = 10;
+  var wonHTML = "<h1>Awesome, You Won!</h1>\n                        <p>You solved the word in ".concat(noOfGuesses + (totalGuesses - remainingGuesses), " Guesses!</p>\n                        <p>Score: ").concat(calcualteGameScore(), "%</p>");
+  wonGameSection.innerHTML = wonHTML;
+}; // wonGame();
+// Display the won message
 
-wonGame(); // Display the won message
-// wonGameSection.classList.remove("hide");
-// const won = '<h1>Awesome, You Won!</h1>'
-//             '<p>You solved the word in ${noOfGuesses} Guesses!</p>'
-//             '<p>Score: (wrong/ right)*100 %</p>';
 
-var gameScore = function gameScore(noOfGuesses, right) {
-  score = (noOfGuesses / right * 100).toFixed(0);
+var calcualteGameScore = function calcualteGameScore() {
+  score = (remainingGuesses / totalGuesses * 100).toFixed(0);
   return score;
+}; // console.log(gameScore(10, 5));
+
+
+var displayWordHint = function displayWordHint() {
+  var hintHTML = "<p>Hint: ".concat(hint, "</p>");
+  gameHint.innerHTML = hintHTML;
 };
 
-console.log(gameScore(10, 5));
+hintButton.addEventListener("click", function () {
+  hintButton.style.display = "none";
+  displayWordHint();
+});
