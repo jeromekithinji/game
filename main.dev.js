@@ -10,8 +10,8 @@ var wrongSection = document.getElementById("wrong__letters");
 var wonGameSection = document.getElementById("game__won");
 var lostGameSection = document.getElementById("game__lost");
 var gameHint = document.getElementById("game__hint");
-var hintButton = document.getElementById("button__hint");
-var resetButton = document.getElementById("reset__game");
+var hintButton = document.getElementById("hint-button");
+var resetButton = document.getElementById("reset-button");
 var remainingGuesses = 0;
 var noOfGuesses = 0;
 
@@ -171,7 +171,7 @@ var wonGame = function wonGame() {
   frame();
   wonGameSection.classList.remove("hide");
   var noOfGuess = 10;
-  var wonHTML = "<h1>Awesome, You Won!</h1>\n                        <p>You solved the word in ".concat(noOfGuesses + (totalGuesses - remainingGuesses), " Guesses!</p>\n                        <p>Score: ").concat(calcualteGameScore(), "%</p>\n                        <button id=\"reset__game\">Reset</button>");
+  var wonHTML = "<h1>Awesome, You Won!</h1>\n                        <p>You solved the word in ".concat(noOfGuesses + (totalGuesses - remainingGuesses), " Guesses!</p>\n                        <p>Score: ").concat(calcualteGameScore(), "%</p>\n                        <button id=\"reset__game\">Play Again</button>");
   wonGameSection.innerHTML = wonHTML;
 }; // wonGame();
 // Display the won message

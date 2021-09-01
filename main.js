@@ -8,8 +8,8 @@ const wrongSection = document.getElementById("wrong__letters");
 const wonGameSection = document.getElementById("game__won");
 const lostGameSection = document.getElementById("game__lost");
 const gameHint = document.getElementById("game__hint");
-const hintButton = document.getElementById("button__hint");
-const resetButton = document.getElementById("reset__game");
+const hintButton = document.getElementById("hint-button");
+const resetButton = document.getElementById("reset-button");
 
 
 let remainingGuesses = 0;
@@ -177,7 +177,7 @@ const wonGame = () => {
     const wonHTML = `<h1>Awesome, You Won!</h1>
                         <p>You solved the word in ${noOfGuesses + (totalGuesses - remainingGuesses)} Guesses!</p>
                         <p>Score: ${calcualteGameScore()}%</p>
-                        <button id="reset__game">Reset</button>`;
+                        <button id="reset__game">Play Again</button>`;
     wonGameSection.innerHTML = wonHTML;
 };
 // wonGame();

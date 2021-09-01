@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Sen&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,10 +34,12 @@
     <div class="game__input">
         <input type="text" id="guess-letter" class="guess-letter" maxlength="1" placeholder="Enter a letter...">
         <button id="submit-button" class="submit-button" type="button" disabled="true">Guess</button>
+        <button id="hint-button">Hint?</button>
+
         <p id="input__error" class="input__error">No numbers or special characters.</p>
+
     </div>
 
-    <button id="button__hint">Hint?</button>
     <div class="game__hint" id="game__hint">
 
     </div>
@@ -47,14 +50,14 @@
         </ul>
     </div>
 
-    <button id="reset__game">Reset</button>
+    <button id="reset-button">New Word</button>
 
     <div class="game__won hide" id="game__won">
 
     </div>
 
     <div class="game__lost hide" id="game__lost">
-        
+
     </div>
     </main>
 
