@@ -40,6 +40,11 @@ body {
   width: 100%;
 }
 
+.game__score {
+  text-align: right;
+  padding: 15px 20px 10px 10px;
+}
+
 main {
   margin: 0 auto;
   text-align: center;
@@ -54,12 +59,26 @@ main {
 
 .letter {
   display: inline-block;
-  border-bottom: 5px solid darkblue;
+  color: transparent;
+  border-bottom: 5px solid black;
   margin: 0 10px 30px;
   font-size: 50px;
   padding: 10px;
   transition: 0.5s;
   text-transform: uppercase;
+}
+
+.wrong__letter {
+  display: inline-block;
+  color: black;
+  background-color: red;
+  border: 2px groove black;
+  margin: 10px 10px 30px;
+  font-size: 40px;
+  padding: 10px;
+  transition: 2s;
+  text-transform: uppercase;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .game__input {
@@ -73,6 +92,10 @@ main {
   padding: 10px;
 }
 
+#game__hint {
+  margin-bottom: 15px;
+}
+
 .submit-button {
   border: none;
   font-size: 25px;
@@ -81,12 +104,181 @@ main {
   background: #20a9ff;
   color: white;
   transition: 0.3s;
-  margin: 10px 0;
+  margin: 10px 0 0 10px;
   text-shadow: 1px 2px 0 black;
+}
+.submit-button:disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}
+.submit-button:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+#hint-button {
+  border: none;
+  font-size: 15px;
+  padding: 5px 5px;
+  cursor: pointer;
+  background: white;
+  color: black;
+  transition: 0.3s;
+  margin: 10px 0 0 15px;
+}
+#hint-button:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+#reset-button {
+  border: none;
+  font-size: 15px;
+  padding: 5px 5px;
+  cursor: pointer;
+  background: white;
+  color: black;
+  transition: 0.3s;
+  margin: 10px 0 0 15px;
+}
+#reset-button:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.input__error {
+  text-align: left;
+  margin-bottom: 30px;
+  margin-top: 5px;
 }
 
 .submit-letter {
   font-size: 50px;
   height: 30px;
   width: 30px;
+}
+
+.invalid {
+  border: 1px solid red;
+  animation: shake 0.5s;
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+  10% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
+  20% {
+    transform: translate(-3px, 0px) rotate(1deg);
+  }
+  30% {
+    transform: translate(3px, 2px) rotate(0deg);
+  }
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+  50% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg);
+  }
+  70% {
+    transform: translate(3px, 1px) rotate(-1deg);
+  }
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
+  90% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+  100% {
+    transform: translate(1px, -2px) rotate(-1deg);
+  }
+}
+.hide {
+  visibility: hidden;
+}
+
+.unhide {
+  visibility: visible;
+}
+
+.game__won {
+  display: block;
+  padding: 20px;
+  position: absolute;
+  top: 100px;
+  left: 0;
+  right: 0;
+  bottom: 40px;
+  width: 100%;
+  /* height: 100%; */
+  background: #0091ec;
+  z-index: 12402402;
+  opacity: 90%;
+}
+
+.game__won h1, p {
+  font-family: "Sen", sans-serif;
+  padding-bottom: 5px;
+  font-size: 30px;
+}
+
+.game__won button {
+  border: none;
+  font-size: 20px;
+  padding: 5px 5px;
+  cursor: pointer;
+  background: white;
+  color: black;
+  transition: 0.3s;
+  margin: 10px 0 0 15px;
+}
+.game__won button:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.game__lost {
+  display: block;
+  padding: 20px;
+  position: absolute;
+  top: 100px;
+  left: 0;
+  right: 0;
+  bottom: 40px;
+  width: 100%;
+  /* height: 100%; */
+  background: #0091ec;
+  z-index: 12402402;
+  opacity: 90%;
+}
+
+.game__lost h1, p {
+  font-family: "Sen", sans-serif;
+  padding-bottom: 5px;
+  font-size: 30px;
+}
+
+.game__lost button {
+  border: none;
+  font-size: 20px;
+  padding: 5px 5px;
+  cursor: pointer;
+  background: white;
+  color: black;
+  transition: 0.3s;
+  margin: 10px 0 0 15px;
+}
+.game__lost button:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+#game__hint p {
+  font-family: "Sen", sans-serif;
+  font-size: 20px;
+}
+
+.input__error {
+  font-family: "Games", sans-serif;
+  font-size: 15px;
 }
