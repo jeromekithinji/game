@@ -52,6 +52,11 @@ const guessCounter = status => {
     }
 }
 
+const resetGame = (buttonElement) => {
+    buttonElement.addEventListener("click", () => {
+    location.reload();
+})};
+
 // Inserting the word into the blanks on the website by picking the word from the generated random number and looping the li element 
 function wordLetters () {
     errorMessage.classList.add("hide");
@@ -64,6 +69,8 @@ function wordLetters () {
         gameWord.innerHTML += letter;
         remainingGuesses ++;
     }
+    const resetGameButton = document.getElementById("reset-button");
+    resetGame(resetGameButton);
     guessCounter("start");
 }
 wordLetters();
@@ -177,8 +184,10 @@ const wonGame = () => {
     const wonHTML = `<h1>Awesome, You Won!</h1>
                         <p>You solved the word in ${noOfGuesses + (totalGuesses - remainingGuesses)} Guesses!</p>
                         <p>Score: ${calcualteGameScore()}%</p>
-                        <button id="reset__game">Play Again</button>`;
+                        <button id="reset__game__won">Play Again</button>`;
     wonGameSection.innerHTML = wonHTML;
+    const resetGameButton = document.getElementById("reset__game__won");
+    resetGame(resetGameButton);
 };
 // wonGame();
 
@@ -200,14 +209,18 @@ hintButton.addEventListener("click", () => {
     displayWordHint();
 });
 
-resetButton.addEventListener("click", () => {
-    location.reload();
-});
 
 const lostGame = () => {
     lostGameSection.classList.remove("hide");
     const lostHTML = `<h1>You Lost... The word was ${word}</h1>
                         <p>Don't worry, you'll get the next one!</p>
-                        <button id="reset__game">Play Again?</button>`;
+                        <button id="reset__game__lost">Play Again?</button>`;
     lostGameSection.innerHTML = lostHTML;
+    const resetGameButton = document.getElementById("reset__game__lost");
+    resetGame(resetGameButton);
 }
+
+
+// resetButton.addEventListener("click", () => {
+//     location.reload();
+// });

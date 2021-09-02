@@ -49,6 +49,12 @@ var guessCounter = function guessCounter(status) {
       lostGame();
     }
   }
+};
+
+var resetGame = function resetGame(buttonElement) {
+  buttonElement.addEventListener("click", function () {
+    location.reload();
+  });
 }; // Inserting the word into the blanks on the website by picking the word from the generated random number and looping the li element 
 
 
@@ -65,6 +71,8 @@ function wordLetters() {
     remainingGuesses++;
   }
 
+  var resetGameButton = document.getElementById("reset-button");
+  resetGame(resetGameButton);
   guessCounter("start");
 }
 
@@ -171,8 +179,10 @@ var wonGame = function wonGame() {
   frame();
   wonGameSection.classList.remove("hide");
   var noOfGuess = 10;
-  var wonHTML = "<h1>Awesome, You Won!</h1>\n                        <p>You solved the word in ".concat(noOfGuesses + (totalGuesses - remainingGuesses), " Guesses!</p>\n                        <p>Score: ").concat(calcualteGameScore(), "%</p>\n                        <button id=\"reset__game\">Play Again</button>");
+  var wonHTML = "<h1>Awesome, You Won!</h1>\n                        <p>You solved the word in ".concat(noOfGuesses + (totalGuesses - remainingGuesses), " Guesses!</p>\n                        <p>Score: ").concat(calcualteGameScore(), "%</p>\n                        <button id=\"reset__game__won\">Play Again</button>");
   wonGameSection.innerHTML = wonHTML;
+  var resetGameButton = document.getElementById("reset__game__won");
+  resetGame(resetGameButton);
 }; // wonGame();
 // Display the won message
 
@@ -193,12 +203,13 @@ hintButton.addEventListener("click", function () {
   hintButton.style.display = "none";
   displayWordHint();
 });
-resetButton.addEventListener("click", function () {
-  location.reload();
-});
 
 var lostGame = function lostGame() {
   lostGameSection.classList.remove("hide");
-  var lostHTML = "<h1>You Lost... The word was ".concat(word, "</h1>\n                        <p>Don't worry, you'll get the next one!</p>\n                        <button id=\"reset__game\">Play Again?</button>");
+  var lostHTML = "<h1>You Lost... The word was ".concat(word, "</h1>\n                        <p>Don't worry, you'll get the next one!</p>\n                        <button id=\"reset__game__lost\">Play Again?</button>");
   lostGameSection.innerHTML = lostHTML;
-};
+  var resetGameButton = document.getElementById("reset__game__lost");
+  resetGame(resetGameButton);
+}; // resetButton.addEventListener("click", () => {
+//     location.reload();
+// });
