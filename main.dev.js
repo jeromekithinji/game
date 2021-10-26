@@ -31,7 +31,7 @@ playButton.addEventListener("click", function () {
   console.log("The play button works!");
 }); // Words 
 
-var words = [["Dog", "Mans bestfriend"], ["Cheetah", "Fastest animal"]]; // Getting random number to pick a word from array
+var words = [["Dog", "Mans bestfriend"], ["Cheetah", "Fastest animal"], ["Cat", "A small domesticated carnivorous mammal with soft fur, a short snout, and retractable claws. "], ["Elephant", "A very large plant-eating mammal with a prehensile trunk, long curved ivory tusks, and large ears, native to Africa and southern Asia."], ["Rhino", "A large, heavily built plant-eating mammal with one or two horns on the nose and thick folded skin, native to Africa and southern Asia."], ["Lion", "A large tawny-coloured cat that lives in prides, found in Africa and NW India."], ["Zebra", "An African wild horse with black-and-white stripes and an erect mane."], ["Horse", "A solid-hoofed plant-eating domesticated mammal with a flowing mane and tail, used for riding, racing, and to carry and pull loads."], ["Kangaroo", "A large plant-eating marsupial with a long powerful tail and strongly developed hindlimbs that enable it to travel by leaping, found only in Australia and New Guinea."]]; // Getting random number to pick a word from array
 
 function getRandomNumber() {
   return Math.floor(Math.random() * words.length);
