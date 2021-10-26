@@ -1,5 +1,8 @@
 "use strict";
 
+var playButton = document.querySelector("#button__play");
+var startGamePage = document.querySelector(".startGame");
+var gamePage = document.querySelector(".playGame");
 var submitButton = document.getElementById('submit-button');
 var guess = document.getElementById('guess-letter');
 var errorMessage = document.getElementById('input__error');
@@ -10,8 +13,8 @@ var wrongSection = document.getElementById("wrong__letters");
 var wonGameSection = document.getElementById("game__won");
 var lostGameSection = document.getElementById("game__lost");
 var gameHint = document.getElementById("game__hint");
-var hintButton = document.getElementById("hint-button");
-var resetButton = document.getElementById("reset-button");
+var hintButton = document.getElementById("button__hint");
+var resetButton = document.getElementById("button__reset");
 var remainingGuesses = 0;
 var noOfGuesses = 0;
 
@@ -21,7 +24,12 @@ function footerText() {
 }
 
 ;
-footerText(); // Array of words 
+footerText();
+playButton.addEventListener("click", function () {
+  startGamePage.style.display = "none";
+  gamePage.style.display = "block";
+  console.log("The play button works!");
+}); // Words 
 
 var words = [["Dog", "Mans bestfriend"], ["Cheetah", "Fastest animal"]]; // Getting random number to pick a word from array
 
@@ -62,8 +70,7 @@ function wordLetters() {
   errorMessage.classList.add("hide");
   selcetedWordItem = words[getRandomNumber()];
   word = selcetedWordItem[0];
-  hint = selcetedWordItem[1];
-  console.log(hint);
+  hint = selcetedWordItem[1]; // console.log(hint);
 
   for (i = 0; i < word.length; i++) {
     var letter = "<li class=\"letter\">".concat(word.charAt(i), "</li>");
@@ -71,7 +78,7 @@ function wordLetters() {
     remainingGuesses++;
   }
 
-  var resetGameButton = document.getElementById("reset-button");
+  var resetGameButton = document.getElementById("button__reset");
   resetGame(resetGameButton);
   guessCounter("start");
 }
@@ -120,7 +127,7 @@ submitButton.addEventListener("click", function () {
 
         if (wordComplete === 0) {
           wonGame();
-          console.log("Word Complete!!!!"); // gameScore();
+          console.log("Word Complete!!!!");
         }
       }
     }
@@ -176,22 +183,20 @@ var wonGame = function wonGame() {
     });
   };
 
-  frame();
   wonGameSection.classList.remove("hide");
   var noOfGuess = 10;
   var wonHTML = "<h1>Awesome, You Won!</h1>\n                        <p>You solved the word in ".concat(noOfGuesses + (totalGuesses - remainingGuesses), " Guesses!</p>\n                        <p>Score: ").concat(calcualteGameScore(), "%</p>\n                        <button id=\"reset__game__won\">Play Again</button>");
   wonGameSection.innerHTML = wonHTML;
   var resetGameButton = document.getElementById("reset__game__won");
   resetGame(resetGameButton);
-}; // wonGame();
-// Display the won message
+  frame();
+}; // Display the won message
 
 
 var calcualteGameScore = function calcualteGameScore() {
   score = (remainingGuesses / totalGuesses * 100).toFixed(0);
   return score;
-}; // console.log(gameScore(10, 5));
-// Hint button and display hint
+}; // Hint button and display hint
 
 
 var displayWordHint = function displayWordHint() {
@@ -210,6 +215,4 @@ var lostGame = function lostGame() {
   lostGameSection.innerHTML = lostHTML;
   var resetGameButton = document.getElementById("reset__game__lost");
   resetGame(resetGameButton);
-}; // resetButton.addEventListener("click", () => {
-//     location.reload();
-// });
+};

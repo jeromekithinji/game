@@ -1,3 +1,6 @@
+const playButton = document.querySelector("#button__play");
+const startGamePage = document.querySelector(".startGame");
+const gamePage = document.querySelector(".playGame");
 const submitButton = document.getElementById('submit-button');
 const guess = document.getElementById('guess-letter');
 const errorMessage = document.getElementById('input__error');
@@ -8,8 +11,9 @@ const wrongSection = document.getElementById("wrong__letters");
 const wonGameSection = document.getElementById("game__won");
 const lostGameSection = document.getElementById("game__lost");
 const gameHint = document.getElementById("game__hint");
-const hintButton = document.getElementById("hint-button");
-const resetButton = document.getElementById("reset-button");
+const hintButton = document.getElementById("button__hint");
+const resetButton = document.getElementById("button__reset");
+
 
 
 let remainingGuesses = 0;
@@ -21,10 +25,16 @@ function footerText() {
 };
 footerText();
 
+playButton.addEventListener("click", () => {
+    startGamePage.style.display="none";
+    gamePage.style.display="block";
+    console.log("The play button works!")
+});
 
-// Array of words 
+// Words 
 const words = [
-    ["Dog", "Mans bestfriend"], ["Cheetah", "Fastest animal"]
+    ["Dog", "Mans bestfriend"], 
+    ["Cheetah", "Fastest animal"]
 ]
 
 // Getting random number to pick a word from array
@@ -63,13 +73,13 @@ function wordLetters () {
     selcetedWordItem = (words[getRandomNumber()]);
     word = (selcetedWordItem[0]);
     hint = (selcetedWordItem[1]);
-    console.log(hint);
+    // console.log(hint);
     for (i = 0; i < word.length; i++) {
         const letter = `<li class="letter">${word.charAt(i)}</li>`;
         gameWord.innerHTML += letter;
         remainingGuesses ++;
     }
-    const resetGameButton = document.getElementById("reset-button");
+    const resetGameButton = document.getElementById("button__reset");
     resetGame(resetGameButton);
     guessCounter("start");
 }
@@ -95,6 +105,7 @@ guess.addEventListener("input", () => {
         submitButton.disabled = true;
     }
 })
+
 
 wordComplete = word.length;
 wrongLetters = [];
@@ -122,8 +133,6 @@ submitButton.addEventListener("click", () => {
                 if (wordComplete === 0) {
                     wonGame();
                     console.log("Word Complete!!!!");
-                    // gameScore();
-
                 }
             }
         }
@@ -178,7 +187,6 @@ const wonGame = () => {
             origin: { x: 1 }
         });
     };
-    frame()
     wonGameSection.classList.remove("hide");
     const noOfGuess = 10;
     const wonHTML = `<h1>Awesome, You Won!</h1>
@@ -188,15 +196,15 @@ const wonGame = () => {
     wonGameSection.innerHTML = wonHTML;
     const resetGameButton = document.getElementById("reset__game__won");
     resetGame(resetGameButton);
+    frame();
 };
-// wonGame();
+
 
 // Display the won message
 const calcualteGameScore = () => {
     score = (((remainingGuesses)/totalGuesses)*100).toFixed(0);
     return (score);
 }
-// console.log(gameScore(10, 5));
 
 // Hint button and display hint
 const displayWordHint = () => {
@@ -220,7 +228,3 @@ const lostGame = () => {
     resetGame(resetGameButton);
 }
 
-
-// resetButton.addEventListener("click", () => {
-//     location.reload();
-// });

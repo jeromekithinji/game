@@ -12,6 +12,26 @@ body {
   animation: gradient 15s ease infinite;
 }
 
+.playGame, .startGame {
+  height: 100vh;
+}
+
+.playGame {
+  display: none;
+}
+
+.startGame__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+}
+.startGame__header {
+  padding: 10px 0 5px 0;
+  font-size: 80px;
+}
+
 @keyframes gradient {
   0% {
     background-position: 0% 50%;
@@ -115,9 +135,9 @@ main {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
-#hint-button {
+#button {
   border: none;
-  font-size: 15px;
+  font-size: 30px;
   padding: 5px 5px;
   cursor: pointer;
   background: white;
@@ -125,22 +145,48 @@ main {
   transition: 0.3s;
   margin: 10px 0 0 15px;
 }
-#hint-button:hover {
+#button:hover {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+#button__play {
+  font-size: 30px;
+  border: 3px solid;
+  padding: 0.75em 1.5em;
+  border-radius: 50px;
+  background: #20a9ff;
+  color: #fff;
+  -webkit-transition: background-color 0.3s, color 0.3s;
+  transition: background-color 0.3s, color 0.3s;
+}
+#button__reset, #button__hint {
+  font-size: 18px;
+  padding: 5px;
 }
 
-#reset-button {
-  border: none;
-  font-size: 15px;
-  padding: 5px 5px;
-  cursor: pointer;
-  background: white;
-  color: black;
-  transition: 0.3s;
-  margin: 10px 0 0 15px;
+#button__play::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  bottom: -20px;
+  right: -20px;
+  border-radius: 50px;
+  z-index: -1;
+  opacity: 0.4;
+  -webkit-transform: scale3d(0.8, 0.5, 1);
+  transform: scale3d(0.8, 0.5, 1);
 }
-#reset-button:hover {
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+#button__play:hover {
+  -webkit-transition: background-color 0.1s 0.3s, color 0.1s 0.3s;
+  transition: background-color 0.1s 0.3s, color 0.1s 0.3s;
+  color: #ECEFF1;
+  background-color: #3f51b5;
+  -webkit-animation: anim-moema-1 0.3s forwards;
+  animation: anim-moema-1 0.3s forwards;
+}
+#button__play:hover::before {
+  -webkit-animation: anim-moema-2 0.3s 0.3s forwards;
+  animation: anim-moema-2 0.3s 0.3s forwards;
 }
 
 .input__error {
@@ -281,4 +327,47 @@ main {
 .input__error {
   font-family: "Games", sans-serif;
   font-size: 15px;
+}
+
+@-webkit-keyframes anim-moema-1 {
+  60% {
+    -webkit-transform: scale3d(0.8, 0.8, 1);
+    transform: scale3d(0.8, 0.8, 1);
+  }
+  85% {
+    -webkit-transform: scale3d(1.1, 1.1, 1);
+    transform: scale3d(1.1, 1.1, 1);
+  }
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+@keyframes anim-moema-1 {
+  60% {
+    -webkit-transform: scale3d(0.8, 0.8, 1);
+    transform: scale3d(0.8, 0.8, 1);
+  }
+  85% {
+    -webkit-transform: scale3d(1.1, 1.1, 1);
+    transform: scale3d(1.1, 1.1, 1);
+  }
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+@-webkit-keyframes anim-moema-2 {
+  to {
+    opacity: 0;
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+@keyframes anim-moema-2 {
+  to {
+    opacity: 0;
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
 }

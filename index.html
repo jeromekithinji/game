@@ -9,60 +9,62 @@
     <title>Guess the Word</title>
 </head>
 <body>
-    <header class="game__header">
-        GUESS THE WORD!
-    </header>
-
-    <section class="game__score" id="game__score">
-        <!-- <h2>Guesses Remaining: </h2> -->
-    </section>
     
-    <main class="game__container">
-    <div class="game__guess">
-        <ul class="game__word" id="game__word">
-            <!-- <li class="letter">
-                dsf
-            </li>
-            <li class="letter">
-                dsf
-            </li>
-            <li class="letter">
-                dsf
-            </li> -->
-        </ul>
-    </div>
-    <div class="game__input">
-        <input type="text" id="guess-letter" class="guess-letter" maxlength="1" placeholder="Enter a letter...">
-        <button id="submit-button" class="submit-button" type="button" disabled="true">Guess</button>
-        <button id="hint-button">Hint?</button>
+    <section class="startGame">
+        <div class="startGame__container">
+            <header class="startGame__header">
+                GUESS THE WORD!
+            </header>
+            <button id="button__play">PLAY</button>
+        </div>
+    </section>
 
-        <p id="input__error" class="input__error">No numbers or special characters.</p>
+    <section class="playGame">
+        <header class="game__header">
+            GUESS THE WORD!
+        </header>
+        <section class="game__score" id="game__score">
+        </section>
+        
+        <main class="game__container">
+        <div class="game__guess">
+            <ul class="game__word" id="game__word">
+            </ul>
+        </div>
+        <div class="game__input">
+            <input type="text" id="guess-letter" class="guess-letter" maxlength="1" placeholder="Enter a letter...">
+            <button id="submit-button" class="submit-button" type="button" disabled="true">Guess</button>
+            <button id="button__hint">Hint?</button>
 
-    </div>
+            <p id="input__error" class="input__error">No numbers or special characters.</p>
 
-    <div class="game__hint" id="game__hint">
+        </div>
 
-    </div>
-    <div class="wrong__letters hide" id="wrong__letters" >
-        <h2 class="wrong__heading"> Wrong Letters:</h2>
-        <ul class="wrong__guesses" id="wrong__guesses">
-            
-        </ul>
-    </div>
+        <div class="game__hint" id="game__hint">
 
-    <button id="reset-button">New Word</button>
+        </div>
+        <div class="wrong__letters hide" id="wrong__letters" >
+            <h2 class="wrong__heading"> Wrong Letters:</h2>
+            <ul class="wrong__guesses" id="wrong__guesses">
+                
+            </ul>
+        </div>
 
-    <div class="game__won hide" id="game__won">
+        <button id="button__reset">New Word</button>
 
-    </div>
+        <div class="game__won hide" id="game__won">
 
-    <div class="game__lost hide" id="game__lost">
+        </div>
 
-    </div>
-    </main>
+        <div class="game__lost hide" id="game__lost">
 
+        </div>
+        </main>
+
+    </section>
     <footer class="game__footer" id="game__footer">
     </footer>
+
     <!-- <script src="../Sandbox/JavaScript/npm/node_modules/canvas-confetti/dist/"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
     <script src="main.js"></script>
