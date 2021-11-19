@@ -1,3 +1,6 @@
+const startButton = document.getElementById('start-button');
+const startPage = document.getElementById("start");
+const gamePage = document.getElementById("game");
 const submitButton = document.getElementById('submit-button');
 const guess = document.getElementById('guess-letter');
 const errorMessage = document.getElementById('input__error');
@@ -87,7 +90,6 @@ guess.addEventListener("input", () => {
     }
     else if (guess.value = ""){
         submitButton.disabled = true;
-        console.log("stuckk here")
     }
     else {
         guess.classList.add("invalid");
@@ -104,9 +106,7 @@ submitButton.addEventListener("click", () => {
     word = word.toUpperCase();
     guessLetter = (guess.value).toUpperCase();
     if (word.includes(guessLetter)) {
-        console.log("YESSSSS IT includes!!!!");
         noOfGuesses += 1;
-        console.log(noOfGuesses);
         resetInput();
 
         var items = gameWord.getElementsByClassName("letter");
@@ -115,22 +115,16 @@ submitButton.addEventListener("click", () => {
             wordletter = (w.innerHTML).toUpperCase();
             if (wordletter === guessLetter) {
                 w.style.color = "black";
-                // w.classList.remove("hide");
                 wordComplete --;
-                console.log(wordComplete);
                 // Check if all the letters have been matched
                 if (wordComplete === 0) {
                     wonGame();
-                    console.log("Word Complete!!!!");
-                    // gameScore();
-
                 }
             }
         }
     }
     else {
         wrongSection.classList.remove("hide");
-        console.log("NOOO!!!!");
         if (wrongLetters.includes(guessLetter)) {
         }
         else {
@@ -142,13 +136,10 @@ submitButton.addEventListener("click", () => {
     }
 });
 
-
-
 function resetInput () {
     guess.value = "";
     submitButton.disabled = true;
 };
-
 
 // Won game
 var myCanvas = document.createElement('canvas');
@@ -189,14 +180,12 @@ const wonGame = () => {
     const resetGameButton = document.getElementById("reset__game__won");
     resetGame(resetGameButton);
 };
-// wonGame();
 
 // Display the won message
 const calcualteGameScore = () => {
     score = (((remainingGuesses)/totalGuesses)*100).toFixed(0);
     return (score);
 }
-// console.log(gameScore(10, 5));
 
 // Hint button and display hint
 const displayWordHint = () => {
@@ -220,7 +209,7 @@ const lostGame = () => {
     resetGame(resetGameButton);
 }
 
-
-// resetButton.addEventListener("click", () => {
-//     location.reload();
-// });
+startButton.addEventListener("click", () => {
+    startPage.style.display= "none";
+    gamePage.style.display= "block";
+})

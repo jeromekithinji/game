@@ -1,5 +1,8 @@
 "use strict";
 
+var startButton = document.getElementById('start-button');
+var startPage = document.getElementById("start");
+var gamePage = document.getElementById("game");
 var submitButton = document.getElementById('submit-button');
 var guess = document.getElementById('guess-letter');
 var errorMessage = document.getElementById('input__error');
@@ -86,7 +89,6 @@ guess.addEventListener("input", function () {
     errorMessage.classList.add("hide");
   } else if (guess.value = "") {
     submitButton.disabled = true;
-    console.log("stuckk here");
   } else {
     guess.classList.add("invalid");
     errorMessage.classList.remove("hide");
@@ -102,9 +104,7 @@ submitButton.addEventListener("click", function () {
   guessLetter = guess.value.toUpperCase();
 
   if (word.includes(guessLetter)) {
-    console.log("YESSSSS IT includes!!!!");
     noOfGuesses += 1;
-    console.log(noOfGuesses);
     resetInput();
     var items = gameWord.getElementsByClassName("letter");
 
@@ -113,20 +113,16 @@ submitButton.addEventListener("click", function () {
       wordletter = w.innerHTML.toUpperCase();
 
       if (wordletter === guessLetter) {
-        w.style.color = "black"; // w.classList.remove("hide");
-
-        wordComplete--;
-        console.log(wordComplete); // Check if all the letters have been matched
+        w.style.color = "black";
+        wordComplete--; // Check if all the letters have been matched
 
         if (wordComplete === 0) {
           wonGame();
-          console.log("Word Complete!!!!"); // gameScore();
         }
       }
     }
   } else {
     wrongSection.classList.remove("hide");
-    console.log("NOOO!!!!");
 
     if (wrongLetters.includes(guessLetter)) {} else {
       wrongLetters.push(guessLetter);
@@ -183,15 +179,13 @@ var wonGame = function wonGame() {
   wonGameSection.innerHTML = wonHTML;
   var resetGameButton = document.getElementById("reset__game__won");
   resetGame(resetGameButton);
-}; // wonGame();
-// Display the won message
+}; // Display the won message
 
 
 var calcualteGameScore = function calcualteGameScore() {
   score = (remainingGuesses / totalGuesses * 100).toFixed(0);
   return score;
-}; // console.log(gameScore(10, 5));
-// Hint button and display hint
+}; // Hint button and display hint
 
 
 var displayWordHint = function displayWordHint() {
@@ -210,6 +204,9 @@ var lostGame = function lostGame() {
   lostGameSection.innerHTML = lostHTML;
   var resetGameButton = document.getElementById("reset__game__lost");
   resetGame(resetGameButton);
-}; // resetButton.addEventListener("click", () => {
-//     location.reload();
-// });
+};
+
+startButton.addEventListener("click", function () {
+  startPage.style.display = "none";
+  gamePage.style.display = "block";
+});

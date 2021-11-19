@@ -9,57 +9,66 @@
     <title>Guess the Word</title>
 </head>
 <body>
-    <header class="game__header">
-        GUESS THE WORD!
-    </header>
-
-    <section class="game__score" id="game__score">
-        <!-- <h2>Guesses Remaining: </h2> -->
+    <section id="start">
+        <header id="start-header">
+            GUESS THE WORD!
+        </header>
+        <button id="start-button" class="start-button" type="button">Play</button>
     </section>
-    
-    <main class="game__container">
-    <div class="game__guess">
-        <ul class="game__word" id="game__word">
-            <!-- <li class="letter">
-                dsf
-            </li>
-            <li class="letter">
-                dsf
-            </li>
-            <li class="letter">
-                dsf
-            </li> -->
-        </ul>
-    </div>
-    <div class="game__input">
-        <input type="text" id="guess-letter" class="guess-letter" maxlength="1" placeholder="Enter a letter...">
-        <button id="submit-button" class="submit-button" type="button" disabled="true">Guess</button>
-        <button id="hint-button">Hint?</button>
 
-        <p id="input__error" class="input__error">No numbers or special characters.</p>
+    <section id="game">
+        <header class="game__header">
+            GUESS THE WORD!
+        </header>
 
-    </div>
+        <section class="game__score" id="game__score">
+            <!-- <h2>Guesses Remaining: </h2> -->
+        </section>
+        
+        <main class="game__container">
+        <div class="game__guess">
+            <ul class="game__word" id="game__word">
+                <!-- <li class="letter">
+                    dsf
+                </li>
+                <li class="letter">
+                    dsf
+                </li>
+                <li class="letter">
+                    dsf
+                </li> -->
+            </ul>
+        </div>
+        <div class="game__input">
+            <input type="text" id="guess-letter" class="guess-letter" maxlength="1" placeholder="Enter a letter...">
+            <button id="submit-button" class="submit-button" type="button" disabled="true">Guess</button>
+            <button id="hint-button">Hint?</button>
 
-    <div class="game__hint" id="game__hint">
+            <p id="input__error" class="input__error">No numbers or special characters.</p>
 
-    </div>
-    <div class="wrong__letters hide" id="wrong__letters" >
-        <h2 class="wrong__heading"> Wrong Letters:</h2>
-        <ul class="wrong__guesses" id="wrong__guesses">
-            
-        </ul>
-    </div>
+        </div>
 
-    <button id="reset-button">New Word</button>
+        <div class="game__hint" id="game__hint">
 
-    <div class="game__won hide" id="game__won">
+        </div>
+        <div class="wrong__letters hide" id="wrong__letters" >
+            <h2 class="wrong__heading"> Wrong Letters:</h2>
+            <ul class="wrong__guesses" id="wrong__guesses">
+                
+            </ul>
+        </div>
 
-    </div>
+        <button id="reset-button">New Word</button>
 
-    <div class="game__lost hide" id="game__lost">
+        <div class="game__won hide" id="game__won">
 
-    </div>
-    </main>
+        </div>
+
+        <div class="game__lost hide" id="game__lost">
+
+        </div>
+        </main>
+    </section>
 
     <footer class="game__footer" id="game__footer">
     </footer>
